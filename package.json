@@ -1,0 +1,33 @@
+{
+  "name": "cisc498_seniordesign",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/angelj165/CISC498_SeniorDesign#readme",
+  "bugs": {
+    "url": "https://github.com/angelj165/CISC498_SeniorDesign/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelj165/CISC498_SeniorDesign.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "hellonode.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently -n server,client \"tsx watch src/index.ts\" \"npm --prefix client run dev\"",
+    "build": "tsc && npm --prefix client run build",
+    "start": "NODE_ENV=production node dist/index.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "concurrently": "^10.0.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
