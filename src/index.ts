@@ -14,11 +14,11 @@ app.get("/api/hello", (req: Request, res: Response) => {
 
 // In production, serve the built React app
 if (process.env.NODE_ENV === "production") {
-  const clientDist = path.join(import.meta.dirname, "../client/dist");
-  app.use(express.static(clientDist));
+  const frontendDist = path.join(import.meta.dirname, "../frontend/dist");
+  app.use(express.static(frontendDist));
   // Send index.html for any non-API route so React Router works
   app.get("/{*splat}", (req: Request, res: Response) => {
-    res.sendFile(path.join(clientDist, "index.html"));
+    res.sendFile(path.join(frontendDist, "index.html"));
   });
 }
 

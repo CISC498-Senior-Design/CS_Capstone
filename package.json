@@ -16,8 +16,8 @@
   "main": "hellonode.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently -n server,client \"tsx watch src/index.ts\" \"npm --prefix client run dev\"",
-    "build": "tsc && npm --prefix client run build",
+    "dev": "concurrently -n server,frontend \"tsx watch src/index.ts\" \"npm --prefix frontend run dev\"",
+    "build": "tsc && npm --prefix frontend run build",
     "start": "NODE_ENV=production node dist/index.js"
   },
   "dependencies": {
