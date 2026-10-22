@@ -9,7 +9,7 @@ app.use(express.json());
 
 // API routes
 app.get("/api/hello", (req: Request, res: Response) => {
-  res.json({ message: "Hello from Express!" });
+  res.json({ message: "Backened connected" });
 });
 
 // In production, serve the built React app
