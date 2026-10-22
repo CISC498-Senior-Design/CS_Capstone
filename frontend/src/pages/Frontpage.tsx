@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router";
-import Dragin from "./components/Dragin";
+import DragInFile from "./components/DragInFile";
 
 function FrontPage(){
     return <div>
-        <Dragin></Dragin>
+        <DragInFile onFileSelected={(f) => console.log("Got file:", f)} />
     </div>
 }
 
