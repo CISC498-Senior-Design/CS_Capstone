@@ -9,7 +9,7 @@ function App() {
   const [message, setMessage] = useState("Loading...");
 
   useEffect(() => {
-    fetch("/api/hello")
+    fetch("/api/health")
       .then((res) => res.json())
       .then((data: { message: string }) => setMessage(data.message))
       .catch(() => setMessage("Couldn't reach the server"));

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import type { ChangeEvent, DragEvent } from "react";
-import { Routes, Route } from "react-router";
+
 
 interface Props {
     onFileSelected?: (file: File) => void;
