@@ -13,6 +13,9 @@ node_modules/
 *.sqlite
 *.sqlite3
 
+# file uploads
+uploads/
+
 # Build output
 dist/
 
