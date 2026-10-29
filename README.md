@@ -39,7 +39,9 @@ ________________________________________________________________________________
 
 - React 
 - Vite 
-- JavaScript 
+- Typescript
+- Node.js
+- Express
 - Git and GitHub
 
 PACKAGES
