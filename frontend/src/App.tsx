@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
 import FrontPage from "./pages/Frontpage.tsx"
 import GoogleDoc from "./pages/GoogleDocs.tsx"
-import Layout from "./pages/components/Layout.tsx";
 import About from "./pages/About.tsx";
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
   }, []);
 
   return <div>{message} 
-    <Layout></Layout>
     <Routes>
       <Route path="/" element={<FrontPage />} />
       <Route path="/output" element={<GoogleDoc />} />

@@ -1,4 +1,4 @@
-import { Modal } from "./modal";
+import { Modal } from "./Modal.tsx";
 import DragInFile from "./DragInFile";
 import "./ModalAudioDragin.css"
 

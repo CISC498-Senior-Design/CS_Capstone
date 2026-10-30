@@ -1,25 +1,19 @@
-import { useState } from "react";
-import { AudioModal } from "./components/ModalAudioDragIn";
-
+import Topbar from "./components/Topbar";
+import { Sidebar } from "./components/Sidebar/SideBar";
+import { Editor } from "./components/Editor";
+import "./Frontpage.css"
+import { StudyPanel } from "./components/StudyPanel";
 
 function FrontPage(){
 
-    const [audioOpen, setAudioOpen] = useState(false);
-
-    return <div>
-        <button className="record-btn" onClick={() => {setAudioOpen(true)}}>
-            🎧 Record
-        </button>
-
-        <AudioModal
-            open={audioOpen}
-            onClose={() => setAudioOpen(false)}
-            onStartRecording={() => {
-            setAudioOpen(false);
-                //placeholder
-            }}
-        />
+    return (
+        <div className="frontpage">
+            <Topbar></Topbar>
+            <Sidebar></Sidebar>
+            <Editor></Editor>
+            <StudyPanel></StudyPanel>
         </div>
+    )
 }
 
 export default FrontPage;

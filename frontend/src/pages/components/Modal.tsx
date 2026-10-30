@@ -15,12 +15,12 @@ export function Modal({ open, onClose, children }: ModalProps) {
         document.addEventListener("keydown", onKey);
 
         const prevOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
+        document.body.style.overflow = "hidden"; // pauses the background
 
         return () => {
             document.removeEventListener("keydown", onKey);
             document.body.style.overflow = prevOverflow;
-        };
+        }; // cleaner returns previous background
     }, [open, onClose]);
 
 
