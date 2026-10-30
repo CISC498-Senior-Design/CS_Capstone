@@ -1,18 +1,25 @@
-import DragInFile from "./components/DragInFile";
+import { useState } from "react";
+import { AudioModal } from "./components/ModalAudioDragIn";
 
-async function uploadFile(file: File) {
-  const formData = new FormData();
-  formData.append("audio", file); // "audio" must match upload.single("audio")
-
-  const res = await fetch("/api/upload", { method: "POST", body: formData });
-  const data = await res.json();
-  console.log("Got file: " + data);
-}
 
 function FrontPage(){
+
+    const [audioOpen, setAudioOpen] = useState(false);
+
     return <div>
-        <DragInFile onFileSelected={uploadFile} />
-    </div>
+        <button className="record-btn" onClick={() => {setAudioOpen(true)}}>
+            🎧 Record
+        </button>
+
+        <AudioModal
+            open={audioOpen}
+            onClose={() => setAudioOpen(false)}
+            onStartRecording={() => {
+            setAudioOpen(false);
+                //placeholder
+            }}
+        />
+        </div>
 }
 
 export default FrontPage;
