@@ -1,0 +1,15 @@
+.frontpage {
+  display: grid;
+  grid-template-columns: 300px 1fr 400px;
+  grid-template-rows: 80px 1fr;
+  grid-template-areas:
+    "sidebar layout layout"
+    "sidebar editor panel";
+  height: 100vh;
+}
+
+
+.sidebar   { grid-area: sidebar; overflow-y: auto; }
+.layout    { grid-area: topbar; }
+.editor    { grid-area: editor; overflow-y: auto; }
+.study-panel { grid-area: panel; overflow-y: auto; border-left: 1px solid var(--border); }

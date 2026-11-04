@@ -1,0 +1,36 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(60, 50, 70, 0.25);
+  backdrop-filter: blur(8px); /* the blurred page behind the popup */
+  animation: fade-in 150ms ease-out;
+}
+
+.modal-panel {
+  position: relative;
+  width: min(520px, 100%);
+  padding: 48px 48px 36px;
+  border-radius: 24px;
+  background: #faf8f5;
+  box-shadow: 0 24px 60px rgba(40, 30, 60, 0.2);
+  text-align: center;
+  animation: pop-in 180ms ease-out;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+}
+
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes pop-in { from { opacity: 0; transform: scale(0.96) translateY(8px); } }

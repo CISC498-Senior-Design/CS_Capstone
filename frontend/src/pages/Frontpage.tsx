@@ -1,11 +1,19 @@
-import { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router";
-import DragInFile from "./components/DragInFile";
+import Topbar from "./components/Topbar";
+import { Sidebar } from "./components/Sidebar/SideBar";
+import { Editor } from "./components/Editor";
+import "./Frontpage.css"
+import { StudyPanel } from "./components/StudyPanel";
 
 function FrontPage(){
-    return <div>
-        <DragInFile onFileSelected={(f) => console.log("Got file:", f)} />
-    </div>
+
+    return (
+        <div className="frontpage">
+            <Topbar></Topbar>
+            <Sidebar></Sidebar>
+            <Editor></Editor>
+            <StudyPanel></StudyPanel>
+        </div>
+    )
 }
 
 export default FrontPage;
