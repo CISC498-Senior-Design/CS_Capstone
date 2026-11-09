@@ -21,3 +21,6 @@ dist/
 
 # Logs
 npm-debug.log*
+
+# macOS files
+.DS_Store
