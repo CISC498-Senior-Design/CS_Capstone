@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { AudioModal } from "./ModalAudioDragIn";
+import AuthButton from "./AuthButton";
+import "./Components.css";
 
 function Topbar(){
     const [audioOpen, setAudioOpen] = useState(false);
@@ -20,6 +22,7 @@ function Topbar(){
                 //placeholder
             }}
         />
+    <AuthButton></AuthButton>
     </div>)
 }
 
