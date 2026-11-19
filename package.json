@@ -22,9 +22,9 @@
   "scripts": {
     "postinstall": "npm install --prefix frontend && npm install --prefix backend",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently -n server,frontend \"tsx watch --env-file=.env src/index.ts\"  \"npm --prefix frontend run dev\"",
+    "dev": "concurrently -n server,frontend \"tsx watch --env-file=.env backend/index.ts\"  \"npm --prefix frontend run dev\"",
     "build": "tsc && npm --prefix frontend run build",
-    "start": "NODE_ENV=production node --env-file=.env dist/index.js"
+    "start": "NODE_ENV=production node --env-file=.env backend/index.js"
   },
   "dependencies": {
     "express": "^5.3.0",

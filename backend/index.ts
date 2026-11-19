@@ -9,6 +9,12 @@ import session from "express-session";
 import { authRouter } from "./auth.js";
 import { notesRouter } from "./notes.js";
 
+const required = ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "GOOGLE_REDIRECT_URI", "SESSION_SECRET"];
+
+//quick check to see if the env files are actually in
+for (const name of required) {
+  console.log(name, process.env[name] ? "✓ set" : "✗ MISSING");
+}
 
 dotenv.config();
 
