@@ -30,12 +30,36 @@ notesRouter.post("/api/notes", async (req, res) => {
     res.status(201).json(data);
 });
 
-// Read a note's text
+// Read one note: title + text content
 notesRouter.get("/api/notes/:id", async (req, res) => {
-    const drive = google.drive({ version: "v3", auth: res.locals.google });
-    const { data } = await drive.files.export(
-        { fileId: req.params.id, mimeType: "text/plain" },
-        { responseType: "text" }
-    );
-    res.json({ id: req.params.id, content: data });
+  const drive = google.drive({ version: "v3", auth: res.locals.google });
+  const [meta, text] = await Promise.all([
+    drive.files.get({ fileId: req.params.id, fields: "id, name, modifiedTime" }),
+    drive.files.export(
+      { fileId: req.params.id, mimeType: "text/plain" },
+      { responseType: "text" }
+    ),
+  ]);
+
+  res.json({
+    ...meta.data,
+    // Apparently there's an invisible BOM character at the start of exported text
+    content: String(text.data).replace(/^\uFEFF/, ""),
+  });
+});
+
+// Save changes to the title and/or content
+notesRouter.patch("/api/notes/:id", async (req, res) => {
+  const { title, content } = req.body as { title?: string; content?: string };
+  const drive = google.drive({ version: "v3", auth: res.locals.google });
+
+  const { data } = await drive.files.update({
+    fileId: req.params.id,
+    requestBody: title !== undefined ? { name: title } : {},
+    media:
+      content !== undefined ? { mimeType: "text/plain", body: content } : undefined,
+    fields: "id, name, modifiedTime",
+  });
+
+  res.json(data);
 });
