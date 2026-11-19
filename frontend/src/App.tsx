@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
 import FrontPage from "./pages/Frontpage.tsx"
-import GoogleDoc from "./pages/GoogleDocs.tsx"
 import About from "./pages/About.tsx";
+import UserProvider from "./user.tsx";
 
 function App() {
   const [message, setMessage] = useState("Loading...");
@@ -14,12 +14,12 @@ function App() {
       .catch(() => setMessage("Couldn't reach the server"));
   }, []);
 
-  return <div>{message} 
-    <Routes>
-      <Route path="/" element={<FrontPage />} />
-      <Route path="/output" element={<GoogleDoc />} />
-      <Route path="/about" element={<About/>} />
-    </Routes></div>;
+  return <UserProvider>{message} 
+      <Routes>
+        <Route path="/" element={<FrontPage />} />
+        <Route path="/about" element={<About/>} />
+      </Routes>
+    </UserProvider>;
 }
 
 export default App;

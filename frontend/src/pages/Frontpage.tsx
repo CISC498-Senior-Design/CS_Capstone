@@ -4,8 +4,10 @@ import { Editor } from "./components/Editor";
 import "./Frontpage.css"
 import { StudyPanel } from "./components/StudyPanel";
 
-function FrontPage(){
 
+
+function FrontPage(){
+    
     return (
         <div className="frontpage">
             <Topbar></Topbar>

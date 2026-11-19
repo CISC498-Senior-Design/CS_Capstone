@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
+import { useUser, type User } from "../../user.tsx";
 
-//TODO: put all new types into a single file
-type User = { name: string; email: string; picture?: string };
 
 function AuthButton(){
-    const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
+    const {user, login} = useUser();
+    const [loading, setLoading] = useState(false);
 
     function userAuth() {
         useEffect(() => {
             fetch("/api/me")
             .then((res) => (res.ok ? res.json() : null))
-            .then((data: User | null) => setUser(data))
-            .catch(() => setUser(null))
+            .then((data: User | null) => login(data))
+            .catch(() => login(null))
             .finally(() => setLoading(false));
         }, []);
 
         async function signOut() {
             await fetch("/auth/logout", { method: "POST" });
-            setUser(null);
+            login(null); //TODO update user.tsx UserContextType to have signout instead of using login
         }
 
         return signOut
     }
     const signOut = userAuth();
+
 
     if (loading) return null;
 
