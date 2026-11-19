@@ -5,16 +5,41 @@ import multer from "multer";
 import path from "path";
 import crypto from "crypto";
 
+import session from "express-session";
+import { authRouter } from "./auth.js";
+import { notesRouter } from "./notes.js";
+
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+origin: process.env.FRONTEND_URL || "http://localhost:5173",
 }));
 
+app.set("trust proxy", 1); // needed for cloud run for secure cookies
+
 app.use(express.json());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET!,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+    },
+  })
+);
+
+app.use(authRouter);
+app.use(notesRouter);
+
 
 app.get("/api/health", (req, res) => {
   res.json({
@@ -59,3 +84,7 @@ app.post("/api/upload", upload.single("audio"), (req, res) => {
 app.listen(PORT, () => {
   console.log(`Backend running at http://localhost:${PORT}`);
 });
+
+
+//TODO:
+//Needs production database for the session store
