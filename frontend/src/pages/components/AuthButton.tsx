@@ -3,28 +3,27 @@ import { useEffect, useState } from "react";
 //TODO: put all new types into a single file
 type User = { name: string; email: string; picture?: string };
 
-function useAuth() {
+function AuthButton(){
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        fetch("/api/me")
-        .then((res) => (res.ok ? res.json() : null))
-        .then((data: User | null) => setUser(data))
-        .catch(() => setUser(null))
-        .finally(() => setLoading(false));
-    }, []);
+    function userAuth() {
+        useEffect(() => {
+            fetch("/api/me")
+            .then((res) => (res.ok ? res.json() : null))
+            .then((data: User | null) => setUser(data))
+            .catch(() => setUser(null))
+            .finally(() => setLoading(false));
+        }, []);
 
-    async function signOut() {
-        await fetch("/auth/logout", { method: "POST" });
-        setUser(null);
+        async function signOut() {
+            await fetch("/auth/logout", { method: "POST" });
+            setUser(null);
+        }
+
+        return signOut
     }
-
-    return { user, loading, signOut };
-}
-
-function AuthButton(){
-    const { user, loading, signOut } = useAuth();
+    const signOut = userAuth();
 
     if (loading) return null;
 
