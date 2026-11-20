@@ -1,4 +1,0 @@
-export function NotesList(){
-    return <>
-    </>
-}
