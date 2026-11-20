@@ -25,14 +25,17 @@ function FrontPage(){
     return (
         <div className="frontpage">
             <Topbar></Topbar>
-            <Sidebar notes={notes} 
+            {user ? <Sidebar notes={notes} 
                 onCreated={refreshNotes} 
                 selectedId={selectedId}
                 onSelect={setSelectedId}                
             ></Sidebar>
-            <Editor 
+            : <div className="sidebar"> go log in</div>}
+            {user ?  <Editor 
                 noteId={selectedId} onSaved={refreshNotes} key={selectedId} 
             ></Editor>
+            : <div className="editor"> go log in</div>}
+            
             <StudyPanel></StudyPanel>
         </div>
     )
