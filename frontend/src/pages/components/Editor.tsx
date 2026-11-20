@@ -46,6 +46,35 @@ export function Editor({noteId, onSaved}: EditorProps){
         };
     }, [noteId]);
 
+    async function saveContent(changes: { title: string; content: string }) {
+        pending.current = null;
+        setStatus("saving");
+        try {
+            await api.updateNote(noteId, changes);
+            setStatus("saved");
+            onSaved();   //refresh the sidebar so a new title shows up
+        } catch {
+            setStatus("error");
+        }
+    }
+
+    //debouncer that reduces api requests from reduce saving
+    function scheduleSave(nextTitle: string, nextContent: string) {
+        pending.current = { title: nextTitle, content: nextContent };
+        window.clearTimeout(saveTimer.current); 
+        saveTimer.current = window.setTimeout(() => saveContent(pending.current!), 800); // wait a .8 sec
+    }
+
+    //save anything still waiting when switching notes or leaving the page
+    useEffect(() => {
+        return () => {
+            window.clearTimeout(saveTimer.current);
+            if (pending.current) api.updateNote(noteId, pending.current).catch(() => {});
+        };
+        //TODO: save when they actually leave the app
+    }, [noteId]); //if new note selected, clean up
+
+
 
     return <div className="editor">
         Editor Placeholder
