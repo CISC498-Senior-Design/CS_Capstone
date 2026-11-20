@@ -3,10 +3,12 @@ import { api, type NoteSummary } from "../../apihelper";
 
 interface SidebarProps{
     notes : NoteSummary[];  
-    onCreated: () => Promise<void>;  
+    onCreated: () => Promise<void>;
+    selectedId: string | null;
+    onSelect: (id: string) => void;  
 }
 
-export function Sidebar({notes, onCreated}:SidebarProps){
+export function Sidebar({notes, onCreated, selectedId, onSelect}:SidebarProps){
     const [creating, setCreating] = useState(false);
 
     async function handleNewNote() {
