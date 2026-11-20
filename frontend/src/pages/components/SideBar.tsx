@@ -14,8 +14,9 @@ export function Sidebar({notes, onCreated, selectedId, onSelect}:SidebarProps){
     async function handleNewNote() {
         setCreating(true);
         try {
-        await api.createNote(); //creates a real Google Doc
+        const created = await api.createNote(); //creates a real Google Doc
         await onCreated(); //refresh the list
+        onSelect(created.id); // makes the selected note created in editor 
         } catch {
         alert("Couldn't create the note. Please try again.");
         } finally {
@@ -30,7 +31,12 @@ export function Sidebar({notes, onCreated, selectedId, onSelect}:SidebarProps){
         </button>
         <ul className="note-list">
             {notes.map((note) => (
-            <li key={note.id}> {note.name} </li>
+                <button
+                className={note.id === selectedId ? "note-item active" : "note-item"}
+                onClick={() => onSelect(note.id)}
+                >
+                    {note.name}
+                </button>
             ))}
         </ul>
     </div>
