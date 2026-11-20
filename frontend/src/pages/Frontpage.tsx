@@ -10,7 +10,7 @@ import { useUser } from "../user";
 function FrontPage(){
     const [notes, setNotes] = useState<NoteSummary[]>([]);
     const {user} = useUser();
-    const [selectedId, setSelectedId] = useState<string | null>(null); //the selected note
+    const [selectedId, setSelectedId] = useState<string>(""); //the selected note
 
     const refreshNotes = useCallback(async () => {
         setNotes(await api.listNotes());
@@ -31,7 +31,7 @@ function FrontPage(){
                 onSelect={setSelectedId}                
             ></Sidebar>
             <Editor 
-                selectedId={selectedId}
+                noteId={selectedId} onSaved={refreshNotes} key={selectedId} 
             ></Editor>
             <StudyPanel></StudyPanel>
         </div>
