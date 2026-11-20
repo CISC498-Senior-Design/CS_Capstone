@@ -74,9 +74,26 @@ export function Editor({noteId, onSaved}: EditorProps){
         //TODO: save when they actually leave the app
     }, [noteId]); //if new note selected, clean up
 
-
+    if (loading) return <div className="editor">Loading…</div>;
 
     return <div className="editor">
-        Editor Placeholder
+        <input
+            className="editor-title"
+            value={title}
+            placeholder="Untitled note"
+            onChange={(e) => {
+            setTitle(e.target.value);
+            scheduleSave(e.target.value, content);
+            }}
+        />
+        <p className="editor-status">{statusText[status]}</p>
+        <textarea
+            className="editor-body"
+            value={content}
+            onChange={(e) => {
+            setContent(e.target.value);
+            scheduleSave(title, e.target.value);
+            }}
+        />
     </div>
 }
